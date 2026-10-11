@@ -50,7 +50,7 @@ if (typeof document !== 'undefined') {
         const line = document.createElement('div'); line.className = 'lesson-row';
         for (const [className, text] of [ ['lesson-badge', row.label],
           ['lesson-time', `${dateFormat.format(row.start)} ${row.startTime}〜${row.endTime}`],
-          ['lesson-name', row.courseName], ['lesson-room', row.classroomName] ]) {
+          ['lesson-name', row.courseName] ]) {
           const span = document.createElement('span'); span.className = className; span.textContent = text; line.append(span);
         }
         content.append(line);
