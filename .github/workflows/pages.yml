@@ -30,9 +30,10 @@ jobs:
           node tests/lessons.test.cjs
       - name: 公開ファイルを準備
         run: |
-          mkdir -p public/data
+          mkdir -p public/data public/img
           cp index.html style.css lessons.js admin.html admin.css public/
           cp data/lessons.json public/data/
+          cp img/hakkun_wink.png img/logo_new_ver1b.png public/img/
       - name: API取得・公開データ生成
         env:
           HACK_RESERVATION_API_TOKEN: ${{ secrets.HACK_RESERVATION_API_TOKEN }}

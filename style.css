@@ -26,9 +26,10 @@ body {
   font-family: "Hiragino Maru Gothic ProN", "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-.site-header { padding: 25px 40px 0; }
+.site-header { display: flex; justify-content: flex-end; padding: 25px 40px 0; }
 .brand { display: inline-flex; align-items: center; font-size: 27px; font-weight: 800; letter-spacing: -2px; }
-.brand-cross { color: #6c9b70; padding: 0 3px; }
+.brand-logo { display: block; width: 108px; height: auto; }
+.hakkun-icon { display: block; width: 86%; height: 86%; object-fit: contain; }
 .brand-label { border-left: 1px solid #b9cbbd; margin-left: 18px; padding-left: 18px; font-size: 12px; letter-spacing: .1em; font-weight: 600; }
 main { width: min(1120px, calc(100% - 80px)); margin: 0 auto; }
 .welcome { text-align: center; padding: 14px 0 36px; }
