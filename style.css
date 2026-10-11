@@ -1,0 +1,87 @@
+/* 色や余白の共通設定 */
+:root {
+  color-scheme: light;
+  --ink: #34483e;
+  --muted: #68786e;
+  --background: #edf5ee;
+  --accent: #357151;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background: radial-gradient(ellipse at 8% 18%, #fff9e5 0, transparent 42%), radial-gradient(ellipse at 95% 85%, #e2efed 0, transparent 48%), var(--background);
+  font-family: "Hiragino Maru Gothic ProN", "BIZ UDPGothic", "Yu Gothic", Meiryo, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.site-header { padding: 25px 40px 0; }
+.brand { display: inline-flex; align-items: center; font-size: 27px; font-weight: 800; letter-spacing: -2px; }
+.brand-cross { color: #6c9b70; padding: 0 3px; }
+.brand-label { border-left: 1px solid #b9cbbd; margin-left: 18px; padding-left: 18px; font-size: 12px; letter-spacing: .1em; font-weight: 600; }
+main { width: min(1120px, calc(100% - 80px)); margin: 0 auto; }
+.welcome { text-align: center; padding: 14px 0 36px; }
+.welcome-icon { display: block; font-size: 38px; margin-bottom: 10px; }
+h1 { font-size: clamp(24px, 2.7vw, 36px); letter-spacing: .06em; line-height: 1.6; margin: 0; }
+h1 span { display: inline-block; }
+.welcome p { margin: 12px 0 0; font-size: 14px; color: var(--muted); line-height: 1.8; }
+h2 { font-size: 14px; letter-spacing: .1em; font-weight: 700; margin: 0 0 16px 4px; }
+h2 > span { color: #6b9676; margin-right: 6px; }
+.main-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.card { position: relative; text-align: center; text-decoration: none; color: var(--ink); background: #fff; border: 1px solid #ffffff; box-shadow: 0 6px 0 #d7e3d980, 0 12px 24px #34483e06; transition: transform .18s ease, box-shadow .18s ease; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 9px 0 #d7e3d980, 0 16px 28px #34483e0d; }
+.card:active { transform: translateY(0); }
+.card:focus-visible { outline: 3px solid #357151; outline-offset: 5px; }
+.main-card { border-radius: 26px; padding: 26px 22px 22px; }
+.green { --tint: #eaf4e9; --tone: #357151; }
+.orange { --tint: #fff2df; --tone: #9a601e; }
+.purple { --tint: #f1edfb; --tone: #73609a; }
+.card-icon { display: flex; align-items: center; justify-content: center; width: 88px; height: 88px; margin: 0 auto 17px; background: var(--tint); border-radius: 30px; font-size: 45px; }
+h3 { margin: 0; line-height: 1.5; font-size: 23px; }
+.card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin: 8px 0 0; }
+.card-action { display: flex; align-items: center; justify-content: center; gap: 18px; background: var(--tint); color: var(--tone); font-size: 13px; font-weight: 700; border-radius: 12px; padding: 12px 8px; margin-top: 23px; }
+.card-action > span { font-size: 18px; }
+.tools { margin-top: 36px; }
+.sub-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.sub-card { border-radius: 22px; padding: 22px 10px 23px; }
+.sub-icon { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; margin: 0 auto 12px; border-radius: 21px; background: var(--tint); font-size: 33px; }
+.pink { --tint: #fceef0; }
+.blue { --tint: #eaf1fb; }
+.yellow { --tint: #fff5dd; }
+.sub-card h3 { font-size: 17px; }
+.sub-card p { font-size: 11px; }
+.sub-arrow { position: absolute; top: 15px; right: 17px; color: #85968a; font-size: 17px; }
+.tab-note { text-align: right; color: var(--muted); font-size: 11px; margin: 18px 2px 0; }
+footer { text-align: center; font-size: 12px; letter-spacing: .06em; color: var(--muted); padding: 32px 20px 25px; }
+@media (min-width: 1600px) {
+  main { width: min(1320px, calc(100% - 120px)); }
+  .welcome { padding-top: 38px; padding-bottom: 44px; }
+  .main-card { padding-top: 34px; padding-bottom: 28px; }
+  .sub-card { padding-top: 28px; padding-bottom: 28px; }
+}
+@media (max-width: 800px) {
+  .site-header { padding: 20px 24px 0; }
+  main { width: calc(100% - 40px); }
+  .welcome { padding-top: 28px; }
+  .main-grid { gap: 14px; }
+  .main-card { padding: 22px 12px 16px; }
+  h3 { font-size: 19px; }
+  .card-action { font-size: 11px; gap: 8px; }
+  .sub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+}
+@media (max-width: 560px) {
+  .welcome p { font-size: 12px; }
+  h1 { font-size: 24px; }
+  .main-grid { grid-template-columns: 1fr; }
+  .main-card { display: grid; grid-template-columns: 64px 1fr; gap: 0 16px; text-align: left; padding: 20px; }
+  .card-icon { grid-row: 1 / 4; width: 64px; height: 64px; border-radius: 22px; font-size: 34px; margin: 0; align-self: center; }
+  .main-card p { margin-top: 3px; }
+  .card-action { margin-top: 12px; padding: 8px 10px; justify-content: space-between; }
+  .sub-card h3 { font-size: 14px; }
+  .sub-card p { font-size: 10px; }
+  .tab-note { text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .card:hover { transform: none; }
+}
