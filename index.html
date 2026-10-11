@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#edf5ee">
   <title>レッスンの入口 | 8×9</title>
   <link rel="stylesheet" href="style.css">
+  <script src="lessons.js" defer></script>
 </head>
 <body>
   <header class="site-header"><span class="brand">8<span class="brand-cross">×</span>9<span class="brand-label">レッスンの入口</span></span></header>
@@ -15,6 +16,11 @@
       <h1>今日も楽しく<span>プログラミングしよう！</span></h1>
       <p>レッスンが始まったらハックベースにアクセスしましょう。</p>
     </div>
+    <section class="lesson-panel" aria-labelledby="lesson-heading">
+      <div class="lesson-panel-heading"><h2 id="lesson-heading">📅 今日・これからのレッスン</h2><span id="lesson-updated"></span></div>
+      <div id="lesson-content" aria-live="polite"><p>予定を確認しています…</p></div>
+      <noscript><p>予定の表示にはJavaScriptを有効にしてください。</p></noscript>
+    </section>
     <section aria-labelledby="main-heading">
       <h2 id="main-heading"><span aria-hidden="true">✦</span> いつもの教材</h2>
       <div class="main-grid">
@@ -40,6 +46,6 @@
     </section>
     <p class="tab-note">リンクは新しいタブでひらきます。</p>
   </main>
-  <footer>小さな「できた！」を、今日もひとつ。<span aria-hidden="true"> ✨</span></footer>
+  <footer>小さな「できた！」を、今日もひとつ。<span aria-hidden="true"> ✨</span><a class="admin-link" href="admin.html">管理・更新</a></footer>
 </body>
 </html>

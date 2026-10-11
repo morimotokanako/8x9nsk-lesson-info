@@ -1,0 +1,13 @@
+const assert = require('node:assert/strict');
+const { selectLessons } = require('../lessons.js');
+const now = Date.parse('2026-10-11T12:00:00+09:00');
+const row = (start, end) => ({ date: '2026-10-11', startTime: start, endTime: end, courseName: '<b>course</b>', classroomName: 'room' });
+const data = { schemaVersion: 1, status: 'ready', timezone: 'Asia/Tokyo', updatedAt: '2026-10-11T09:00:00+09:00', validUntil: '2026-10-12T09:00:00+09:00', lessons: [row('11:00','12:00'), row('12:00','13:00'), row('14:00','15:00'), row('14:00','15:00'), row('16:00','17:00')] };
+assert.equal(selectLessons(data, now).rows.length, 3);
+assert.equal(selectLessons(data, now).rows[0].label, 'ただいま');
+assert.equal(selectLessons(data, Date.parse(data.validUntil)).state, 'expired');
+assert.equal(selectLessons({schemaVersion:1,status:'unconfigured'},now).state,'unconfigured');
+assert.equal(selectLessons({...data,lessons:[]},now).rows.length,0);
+assert.throws(()=>selectLessons({...data,lessons:[row('20:00','10:00')]},now));
+assert.throws(()=>selectLessons({...data,validUntil:'bad'},now));
+console.log('PASS: active/next groups, end boundary, expiration, unconfigured, empty, invalid data');

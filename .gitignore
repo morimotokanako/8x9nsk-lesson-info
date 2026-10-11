@@ -1,3 +1,6 @@
 .DS_Store
 outputs/
 work/
+public/
+__pycache__/
+*.pyc

@@ -1,4 +1,15 @@
 /* 色や余白の共通設定 */
+.lesson-panel { margin: 0 0 32px; padding: 20px 24px; border: 1px solid #cfdfd2; border-radius: 20px; background: #ffffffb8; }
+.lesson-panel-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.lesson-panel-heading h2 { margin: 0; }
+#lesson-updated { font-size: 11px; color: #68786e; }
+#lesson-content > p { font-size: 13px; color: #68786e; margin-bottom: 0; }
+.lesson-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; padding-top: 14px; }
+.lesson-badge { border-radius: 8px; padding: 4px 9px; background: #eaf4e9; color: #357151; font-size: 12px; font-weight: bold; }
+.lesson-time { font-size: 14px; }
+.lesson-name { font-weight: bold; font-size: 15px; }
+.lesson-room { color: #68786e; font-size: 12px; }
+.admin-link { display: block; width: fit-content; margin: 16px auto 0; color: #68786e; font-size: 11px; }
 :root {
   color-scheme: light;
   --ink: #34483e;

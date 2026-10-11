@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>管理・更新 | レッスンの入口</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="admin-main">
+    <a href="index.html">← レッスンの入口へ</a>
+    <h1>レッスン予定の管理・更新</h1>
+    <p>設定と更新はGitHubにログインして操作します。このページは操作先の案内です。</p>
+    <section class="admin-box">
+      <h2>1. APIキーを登録する</h2>
+      <p>管理者がGitHubの「New repository secret」で登録します。</p>
+      <dl><dt>Name</dt><dd><code>HACK_RESERVATION_API_TOKEN</code></dd><dt>Secret</dt><dd>発行済みのAPIキー本体（Bearerは付けません）</dd></dl>
+      <a class="admin-button" href="https://github.com/morimotokanako/8x9nsk-lesson-info/settings/secrets/actions" target="_blank" rel="noopener noreferrer">GitHubでAPIキーを設定 ↗</a>
+    </section>
+    <section class="admin-box">
+      <h2>2. 対象教室を設定する</h2>
+      <p>「New repository variable」で、次の2項目を登録します。</p>
+      <dl><dt><code>LESSON_CLASSROOM_IDS</code></dt><dd>対象の教室IDをカンマ区切りで入力。管理者が予約システムの教室IDと照合してください。</dd><dt><code>LESSON_API_ENABLED</code></dt><dd>取得した日時・教室名・コース名を一般公開してよいことを確認後、<code>true</code>を設定します。未設定・falseでは準備中表示になります。</dd></dl>
+      <a class="admin-button" href="https://github.com/morimotokanako/8x9nsk-lesson-info/settings/variables/actions" target="_blank" rel="noopener noreferrer">GitHubで教室・表示を設定 ↗</a>
+    </section>
+    <section class="admin-box">
+      <h2>3. 予定を取得・公開する</h2>
+      <p>「Run workflow」でブランチmainを選び、実行します。取得と公開が緑のチェックで完了したら、表示ページを確認してください。</p>
+      <a class="admin-button" href="https://github.com/morimotokanako/8x9nsk-lesson-info/actions/workflows/pages.yml" target="_blank" rel="noopener noreferrer">予定を更新・実行結果を見る ↗</a>
+    </section>
+    <section class="admin-box admin-note">
+      <h2>叩き台の運用</h2>
+      <ul><li>対象は当月・翌月。下書きを除き、開催中と次の開始時刻のレッスンを表示します。</li><li>現在は手動更新とmainへのpush時に取得します。自動の定期取得はまだ設定していません。</li><li>予定の有効期限は取得から24時間です。教室で使う前に更新してください。</li><li>取得に失敗した場合、公開ページは更新されません。前回の予定も期限を過ぎると非表示になります。</li><li>担当講師はAPIの項目が未確認のため、まだ表示しません。</li><li>スタッフの更新操作には、このリポジトリへの書き込み権限が必要です。APIキーの設定は管理者が行います。</li></ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+name: レッスン予定の取得・ページ公開
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lesson-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: 検証
+        run: |
+          python -m unittest discover -s tests -v
+          node tests/lessons.test.cjs
+      - name: 公開ファイルを準備
+        run: |
+          mkdir -p public/data
+          cp index.html style.css lessons.js admin.html admin.css public/
+          cp data/lessons.json public/data/
+      - name: API取得・公開データ生成
+        env:
+          HACK_RESERVATION_API_TOKEN: ${{ secrets.HACK_RESERVATION_API_TOKEN }}
+          LESSON_CLASSROOM_IDS: ${{ vars.LESSON_CLASSROOM_IDS }}
+          LESSON_API_ENABLED: ${{ vars.LESSON_API_ENABLED }}
+        run: |
+          if [ "$LESSON_API_ENABLED" = "true" ]; then
+            python scripts/fetch_lessons.py
+          else
+            echo 'API未有効化：予定準備中のページを公開します。'
+          fi
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 公開
+        id: deployment
+        uses: actions/deploy-pages@v4

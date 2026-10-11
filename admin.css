@@ -1,0 +1,13 @@
+.admin-main { max-width: 850px; padding-top: 32px; padding-bottom: 50px; }
+.admin-main > a { color: #357151; font-size: 14px; }
+.admin-main h1 { font-size: 28px; margin-top: 24px; }
+.admin-main p, .admin-main li, .admin-main dd { font-size: 14px; line-height: 1.9; }
+.admin-box { padding: 26px; margin-top: 24px; background: white; border-radius: 20px; }
+.admin-box h2 { font-size: 18px; margin-left: 0; }
+.admin-box dt { font-weight: bold; font-size: 13px; margin-top: 14px; }
+.admin-box dd { margin: 5px 0 0; }
+.admin-box code { overflow-wrap: anywhere; }
+.admin-button { display: inline-block; padding: 12px 18px; margin-top: 10px; border-radius: 10px; color: white; background: #357151; font-size: 14px; text-decoration: none; }
+.admin-button:focus-visible { outline: 3px solid #9a601e; outline-offset: 4px; }
+.admin-note { background: #ffffff99; }
+.admin-note ul { padding-left: 22px; margin-bottom: 0; }
