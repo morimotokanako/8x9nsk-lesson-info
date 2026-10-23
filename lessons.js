@@ -21,7 +21,7 @@ function selectLessons(data, now = Date.now()) {
   const future = rows.filter(row => row.start > now);
   const next = future.length ? future.filter(row => row.start === future[0].start) : [];
   return { state: 'ready', updated, rows: [
-    ...active.map(row => ({ ...row, label: 'ただいま' })),
+    ...active.map(row => ({ ...row, label: 'レッスン中' })),
     ...next.map(row => ({ ...row, label: 'つぎのレッスン' }))
   ] };
 }
@@ -49,7 +49,7 @@ if (typeof document !== 'undefined') {
       for (const row of view.rows) {
         const line = document.createElement('div'); line.className = 'lesson-row';
         for (const [className, text] of [ ['lesson-badge', row.label],
-          ['lesson-time', `${dateFormat.format(row.start)} ${row.startTime}〜${row.endTime}`],
+          ['lesson-time', `${row.label === 'レッスン中' ? '' : dateFormat.format(row.start) + ' '}${row.startTime}〜${row.endTime}`],
           ['lesson-name', row.courseName] ]) {
           const span = document.createElement('span'); span.className = className; span.textContent = text; line.append(span);
         }
