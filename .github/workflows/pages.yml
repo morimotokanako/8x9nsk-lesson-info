@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Every hour at :45 UTC (also :45 in Japan Standard Time).
+    - cron: "45 * * * *"
 
 permissions:
   contents: read
