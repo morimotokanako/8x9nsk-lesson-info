@@ -141,3 +141,5 @@ footer { text-align: center; font-size: 12px; letter-spacing: .06em; color: var(
   .lesson-home .sub-card p { font-size: 10px; }
   .lesson-home .sub-arrow { top: 2px; right: 8px; font-size: 13px; }
 }
+
+.sub-icon img { display: block; width: 78%; height: 78%; object-fit: contain; border-radius: 5px; }
