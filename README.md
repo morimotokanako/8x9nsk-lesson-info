@@ -41,8 +41,8 @@
 | --- | --- |
 | 8x9上級コース | [上級コース教材](https://8x9.notion.site/8x9-9d2c09c50df047fd9d2779629bd6be53?pvs=143) |
 | ピクトグラミング | [ピクトグラミング](https://pictogramming.org/toppage/) |
-| firealpaca | [ダウンロード](https://firealpaca.com/ja/download/) |
 | NASサーバー | [ファイル保存](https://iot.myasustor.com:8801/portal/?6ADC2DCA) |
+| firealpaca | [ダウンロード](https://firealpaca.com/ja/download/) |
 
 ## ファイル構成
 
