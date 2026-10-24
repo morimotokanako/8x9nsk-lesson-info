@@ -36,7 +36,7 @@ jobs:
           mkdir -p public/data public/img
           cp index.html style.css lessons.js admin.html admin.css public/
           cp data/lessons.json public/data/
-          cp img/hakkun_wink.png img/logo_new_ver1b.png img/notion.jpg img/Pictagramming.png public/img/
+          cp img/hakkun_wink.png img/logo_new_ver1b.png img/notion.jpg img/Pictagramming.png img/nas-server.png public/img/
       - name: API取得・公開データ生成
         env:
           HACK_RESERVATION_API_TOKEN: ${{ secrets.HACK_RESERVATION_API_TOKEN }}
