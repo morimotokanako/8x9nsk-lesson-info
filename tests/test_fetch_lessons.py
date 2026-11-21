@@ -19,6 +19,16 @@ def page(items, number=1, last=1, total=None):
 
 
 class FetchTests(unittest.TestCase):
+    def test_documented_response_format(self):
+        item = {'id': 1, 'classroom_id': 'ROOM', 'classroom': {'id': 'ROOM', 'name': 'テスト教室'},
+            'course_id': 'C1', 'course': {'id': 'C1', 'name': 'テストコース'},
+            'date': '2026-10-01', 'year': 2026, 'month': 10, 'day': 1,
+            'start_time': '10:00', 'end_time': '11:30', 'draft': False,
+            'teachers': [{'email': 'private@example.invalid'}]}
+        rows = collect('unused', ['ROOM'], ['2026-10'], lambda *args: page([item]))
+        self.assertEqual(rows, [{'date': '2026-10-01', 'startTime': '10:00', 'endTime': '11:30',
+            'courseName': 'テストコース', 'classroomName': 'テスト教室'}])
+
     def test_jst_boundary_and_allowlist(self):
         _, _, row = normalize(lesson(), 'ROOM', '2026-10')
         self.assertEqual(row['date'], '2026-10-01')

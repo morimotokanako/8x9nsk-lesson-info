@@ -51,24 +51,29 @@ def normalize(item, room, month):
     require(isinstance(item, dict), 'レッスンの形式が不正です。')
     classroom, course = item.get('classroom'), item.get('course')
     require(isinstance(classroom, dict) and isinstance(course, dict), '教室・コースがありません。')
-    require(item.get('classroomId') == classroom.get('id') == room, '教室IDが一致しません。')
-    require(isinstance(item.get('courseId'), str) and item['courseId'] == course.get('id'), 'コースIDが一致しません。')
+    classroom_id = item.get('classroom_id', item.get('classroomId'))
+    course_id = item.get('course_id', item.get('courseId'))
+    require(classroom_id == classroom.get('id') == room, '教室IDが一致しません。')
+    require(isinstance(course_id, str) and course_id == course.get('id'), 'コースIDが一致しません。')
     require(isinstance(course.get('name'), str) and isinstance(classroom.get('name'), str), '表示名が不正です。')
     require(type(item.get('draft')) is bool, '下書き属性が不正です。')
     identifier = item.get('id')
     require(type(identifier) in (str, int) and str(identifier) != '', 'レッスンIDが不正です。')
     date = item.get('date')
-    require(isinstance(date, str) and re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})', date), '日付が不正です。')
+    require(isinstance(date, str) and (re.fullmatch(r'\d{4}-\d{2}-\d{2}', date) or re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})', date)), '日付が不正です。')
     try:
-        local_date = dt.datetime.fromisoformat(date.replace('Z', '+00:00')).astimezone(JST).date()
+        local_date = (dt.date.fromisoformat(date) if len(date) == 10 else
+            dt.datetime.fromisoformat(date.replace('Z', '+00:00')).astimezone(JST).date())
         require(all(type(item.get(k)) is int for k in ('year', 'month', 'day')), '年月日の型が不正です。')
         require(local_date == dt.date(item['year'], item['month'], item['day']), '日本時間の日付が一致しません。')
     except (ValueError, TypeError, KeyError):
         raise InvalidData('日本時間の日付が不正です。') from None
     require(local_date.strftime('%Y-%m') == month, '取得対象月と日付が一致しません。')
-    for key in ('startTime', 'endTime'):
-        require(isinstance(item.get(key), str) and re.fullmatch(r'(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?', item[key]), '時刻が不正です。')
-    start, end = item['startTime'][:5], item['endTime'][:5]
+    start_time = item.get('start_time', item.get('startTime'))
+    end_time = item.get('end_time', item.get('endTime'))
+    for value in (start_time, end_time):
+        require(isinstance(value, str) and re.fullmatch(r'(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?', value), '時刻が不正です。')
+    start, end = start_time[:5], end_time[:5]
     require(start < end, '日跨ぎ・終了時刻の仕様は未対応です。')
     # Only explicitly permitted display fields leave the job. Teacher mapping is unconfirmed.
     return str(identifier), item['draft'], {'date': str(local_date), 'startTime': start,
